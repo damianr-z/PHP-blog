@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<?php require_once("init.php") ?>
+<?php require_once(__DIR__ . "/init.php") ?>
 
 
 
@@ -35,6 +35,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
     
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 

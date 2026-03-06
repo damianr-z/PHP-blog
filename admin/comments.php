@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include(__DIR__ . "/includes/header.php"); ?>
 
 <?php if(!$session->is_signed_in()) {redirect("login.php");}  ?>
 
@@ -12,11 +12,11 @@ $comments = Comment::find_all();
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
 
-            <?php include("includes/top_nav.php") ?>
+            <?php include(__DIR__ . "/includes/top_nav.php") ?>
 
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             
-            <?php include("includes/side_nav.php") ?>
+            <?php include(__DIR__ . "/includes/side_nav.php") ?>
 
             <!-- /.navbar-collapse -->
         </nav>
@@ -51,7 +51,7 @@ $comments = Comment::find_all();
                             <td><?php echo $comment->author; ?>                            
                                 <div class="action_links">
                                     <a href="comment_delete.php?id=<?php echo $comment->id; ?>">Delete</a>
-                                    <!-- <a href="user_edit.php?id=<?php echo $comment->id; ?>">Edit</a> -->
+                                    <!-- <a href="user_edit.php?id=COMMENT_ID">Edit</a> -->
                                 </div>
                             </td>
                                 
@@ -74,4 +74,4 @@ $comments = Comment::find_all();
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+    <?php include(__DIR__ . "/includes/footer.php"); ?>

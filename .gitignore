@@ -1,0 +1,42 @@
+node_modules/
+vendor/
+
+.pnpm-store/
+.npm/
+.yarn/
+
+dist/
+build/
+coverage/
+
+tmp/
+temp/
+cache/
+logs/
+
+.vscode/
+.idea/
+
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Local env files
+.env
+.env.*
+
+# Local planning/tooling artifacts
+DASHBOARD_PLAN.md
+.oxfmtrc.json
+
+# Accidental local asset copy
+admin/images/images-2 copy.jpg
+
+

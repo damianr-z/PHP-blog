@@ -1,4 +1,4 @@
-<?php include("includes/init.php"); ?>
+<?php include(__DIR__ . "/includes/init.php"); ?>
 
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 
