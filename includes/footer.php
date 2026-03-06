@@ -2,10 +2,10 @@
         <hr>
 
         <!-- Footer -->
-        <footer>
+        <footer style="text-align: center; width: 100%;">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                <div class="col-lg-12 text-center">
+                    <p class="text-center">Copyright &copy; Your Website 2014</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
