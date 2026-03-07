@@ -13,5 +13,6 @@ require_once(__DIR__ . DS . "db_object.php");
 require_once(__DIR__ . DS . "user.php");
 require_once(__DIR__ . DS . "photo.php");
 require_once(__DIR__ . DS . "session.php");
+require_once(__DIR__ . DS . "paginate.php");
 
 ?>
