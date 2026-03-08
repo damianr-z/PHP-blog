@@ -114,14 +114,24 @@ public static function find_by_id( $id ) {
         global $database;
         
         $properties = $this->clean_properties();
-        global $database;
+        unset($properties['id']);
         
         $properties_pairs = array();
 
         foreach ($properties as $key => $value) {
-            $clean_properties[$key] = $database->escape_string($value);          
+            $properties_pairs[] = "{$key}='{$value}'";
         }
-        return $clean_properties;
+
+        $class = get_called_class();
+        $id_column = property_exists($class, 'db_table_id') ? $class::$db_table_id : 'id';
+
+        $sql = "UPDATE " . static::$db_table . " SET ";
+        $sql .= implode(", ", $properties_pairs);
+        $sql .= " WHERE {$id_column} = " . $database->escape_string($this->id);
+
+        $database->query($sql);
+
+        return (mysqli_affected_rows($database->connection) >= 0) ? true : false;
     }
 
     public function delete() {

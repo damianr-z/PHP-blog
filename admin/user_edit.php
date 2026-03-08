@@ -1,10 +1,9 @@
 <?php include(__DIR__ . "/includes/header.php"); ?>
+<?php include(__DIR__ . "/includes/photo_library_modal.php"); ?>
 
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 
 <?php 
-
-
 if(isset($_GET['id'])) {
     $user = User::find_by_id($_GET['id']);
 } else {
@@ -32,15 +31,6 @@ if(isset($_POST['update'])) {
 
 
     }
-
-
-
-
-
-
-
-
-
 ?>
 
 
@@ -66,11 +56,10 @@ if(isset($_POST['update'])) {
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Users
-                    <small>Subheading</small>
                 </h1>
 
-                <div class="col-md-6">
-                <img class="img-responsive" src="<?php echo $user->image_placeholder_path(); ?>" alt="">
+                <div class="col-md-6 user_image_box">
+                <a href="#" data-toggle="modal" data-target="#photo-library"><img class="img-responsive" src="<?php echo $user->image_placeholder_path(); ?>" alt=""></a>
 
                 </div>
                  
@@ -104,7 +93,7 @@ if(isset($_POST['update'])) {
                         </div>
 
                             <div class="info-box-delete pull-left">
-                                <a  href="user_delete.php?id=<?php echo $user->id; ?>" class="btn btn-danger pull-right">Delete</a>   
+                                <a id="user-id" href="user_delete.php?id=<?php echo $user->id; ?>" class="btn btn-danger pull-right">Delete</a>   
                             </div>
 
                         <div class="form-group">  

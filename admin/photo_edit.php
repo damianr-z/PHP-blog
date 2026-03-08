@@ -48,7 +48,6 @@ if(empty($_GET["id"])) {
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Photos
-                    <small>Subheading</small>
                 </h1>
                  
                 <form action="photo_edit.php?id=<?php echo $photo->id; ?>" method='post'>

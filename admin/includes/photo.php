@@ -1,8 +1,6 @@
 <?php 
 
 class Photo extends Db_object {
-
-
     protected static $db_table = "photos";
     protected static $db_table_id = "id";
     protected static $db_table_fields = array("id", "title", "caption", "description", "filename", "alternate_text", "type", "size");
@@ -14,10 +12,8 @@ class Photo extends Db_object {
     public $alternate_text;
     public $type;
     public $size;
-
     public $tmp_path;
     public $uploads_directory = "images";
-
 
     //thi si passing $_FILES['uploaded_file'] as an argument
 
@@ -79,11 +75,21 @@ class Photo extends Db_object {
     public function photo_delete() {
         if($this->delete()) {
             $target_path = SITE_ROOT . DS . 'admin' . DS . $this->uploads_directory . DS . $this->filename;
-            
             return unlink($target_path) ? true : false;
         } else {
             return false;
         }
+    }
+
+    public static function display_sidebar_data($photo_id) {
+        $photo = Photo::find_by_id($photo_id);
+        // $output = "<a class='thumbnail' href='#'><img width='100' src='{$photo->picture_path()}' /></a>";
+         $output = "<h4 class='modal-title'>Photo Information</h4>";
+        $output .= "<ul class='modal-list'><li>{$photo->filename}</li>";
+        $output .= "<li>{$photo->type}</li>";
+        $output .= "<li>{$photo->size}</li></ul>";
+
+        echo $output;
     }
 
 

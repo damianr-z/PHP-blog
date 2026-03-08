@@ -84,3 +84,28 @@ ul.pager > li.active > a:focus {
   background-color: #000 !important;
   color: #fff !important;
 }
+
+/* Edit user modal styles */
+
+.modal-dialog {
+  width: 60% !important;
+}
+
+.modal-body {
+  overflow: auto;
+  height: 150px !important;
+  min-height: 300px !important;
+}
+
+.modal_thumbnails {
+  width: 150px;
+  height: 100px !important;
+}
+
+#set_user_image {
+  margin: 10px;
+}
+
+#modal_sidebar {
+  position: static;
+}

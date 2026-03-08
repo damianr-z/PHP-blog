@@ -11,6 +11,7 @@ class User extends Db_object {
     public $first_name;
     public $last_name;
     public $user_image;
+    public $filename;
     public $tmp_path = '';
     public $upload_directory = "images";
     public $image_placeholder = "https://placeholdit.com/75x60/?text=No+Image";
@@ -20,15 +21,22 @@ class User extends Db_object {
 
     //this id passing $_FILES['uploaded_file'] as an argument
 
-    public function photo_uploader() {
+    public function set_file($file) {
+        parent::set_file($file);
 
-    if($this->id) {
-        $this->update();
-    } else {
         if(!empty($this->errors)) {
             return false;
         }
+
+        $this->user_image = $this->filename;
+        return true;
     }
+
+    public function photo_uploader() {
+
+            if(!empty($this->errors)) {
+                return false;
+            }
 
             if(empty($this->user_image) || empty($this->tmp_path)) {
                 $this->errors[] = "There was no file uploaded here";
@@ -72,6 +80,23 @@ class User extends Db_object {
         $the_result_array = self::find_by_query($sql);
         
         return !empty($the_result_array) ? array_shift($the_result_array) : false ;
+    }
+
+    public function ajax_save_user_image($user_image, $user_id) {
+
+    global $database;
+    
+    $user_image = $database->escape_string($user_image);
+    $user_id = $database->escape_string($user_id);
+    $this->user_image = $user_image;
+    $this->id = $user_id;
+    
+    $sql = "UPDATE " . self::$db_table . " SET user_image = '{$this->user_image}' ";
+    $sql .= " WHERE id = {$this->id} ";
+    $update_image = $database->query($sql);
+
+    echo $this->image_placeholder_path();
+
     }
 
 

@@ -36,6 +36,11 @@ Thumbs.db
 DASHBOARD_PLAN.md
 .oxfmtrc.json
 
+# Markdown docs (keep README files tracked)
+*.md
+!README.md
+!readme.md
+
 # Accidental local asset copy
 admin/images/images-2 copy.jpg
 
