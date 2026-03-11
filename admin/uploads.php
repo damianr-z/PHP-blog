@@ -5,6 +5,7 @@
 <?php
 if(isset($_FILES['file-upload']) && !isset($_POST['submit'])) {
     $photo = new Photo();
+    $photo->user_id = $_SESSION['user_id'];
     $photo->title = isset($_POST['title']) ? $_POST['title'] : '';
     $photo->set_file($_FILES['file-upload']);
 

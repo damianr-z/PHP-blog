@@ -3,7 +3,7 @@
 class Photo extends Db_object {
     protected static $db_table = "photos";
     protected static $db_table_id = "id";
-    protected static $db_table_fields = array("id", "title", "caption", "description", "filename", "alternate_text", "type", "size");
+    protected static $db_table_fields = array("id", "title", "caption", "description", "filename", "alternate_text", "type", "size", "user_id");
     public $id;
     public $title;
     public $caption; 
@@ -14,8 +14,13 @@ class Photo extends Db_object {
     public $size;
     public $tmp_path;
     public $uploads_directory = "images";
+    public $user_id;
 
     //thi si passing $_FILES['uploaded_file'] as an argument
+
+    public function __construct() {
+        $this->user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    }
 
     public function set_file($file) {
 
@@ -70,6 +75,20 @@ class Photo extends Db_object {
 
         } 
     }
+
+    public function delete_resource() {
+        if (!$this->delete()) {
+            return false;
+        }
+
+        $target_path = SITE_ROOT . DS . 'admin' . DS . $this->picture_path();
+        if (file_exists($target_path)) {
+            return unlink($target_path);
+        }
+
+        return true;
+    }
+
     public static function display_sidebar_data($photo_id) {
         $photo = Photo::find_by_id($photo_id);
         // $output = "<a class='thumbnail' href='#'><img width='100' src='{$photo->picture_path()}' /></a>";

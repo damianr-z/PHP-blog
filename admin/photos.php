@@ -4,7 +4,8 @@
 
 <?php 
 
-$photos = Photo::find_all();
+$current_user = User::find_by_id($_SESSION['user_id']);
+$photos = $current_user ? $current_user->photos() : [];
 
 
 ?>

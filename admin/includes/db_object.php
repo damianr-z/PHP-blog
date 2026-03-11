@@ -148,6 +148,10 @@ public static function find_by_id( $id ) {
         return (mysqli_affected_rows($database->connection) === 1) ? true : false;
     }
 
+    public function delete_resource() {
+        return $this->delete();
+    }
+
     protected function properties() {
         $properties = array();
         foreach (static::$db_table_fields as $db_field) {
