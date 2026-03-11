@@ -13,11 +13,10 @@ if(isset($_FILES['file-upload']) && !isset($_POST['submit'])) {
 
     if($photo->save()) {
         $message = "Photo uploaded successfully";
-        $message_class = "bg-success";
     } else {
         $message = join("<br>", $photo->errors);
-        $message_class = "bg-danger";
     }
+    echo $message;
     exit;
 }
 
