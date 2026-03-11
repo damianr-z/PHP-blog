@@ -5,40 +5,33 @@
 <?php
 $message = "";
 $message_class = "";
-if(isset($_FILES['file-upload']) && !isset($_POST['submit'])) {
+$is_dropzone = isset($_FILES['file-upload']) && !isset($_POST['submit']);
+
+if ($is_dropzone || isset($_POST['submit'])) {
     $photo = new Photo();
     $photo->user_id = $_SESSION['user_id'];
     $photo->title = isset($_POST['title']) ? $_POST['title'] : '';
     $photo->set_file($_FILES['file-upload']);
 
-    if($photo->save()) {
-        $message = "Photo uploaded successfully";
-    } else {
-        $message = join("<br>", $photo->errors);
-    }
-    echo $message;
-    exit;
-}
-
-?>
-
-<?php include(__DIR__ . "/includes/header.php"); ?>
-
-<?php 
-
-if(isset($_POST['submit'])) {
-    $photo = new Photo();
-    $photo->title = $_POST['title'];
-    $photo->set_file($_FILES['file-upload']);
-
-    if($photo->save()) {
+    if ($photo->save()) {
         $message = "Photo uploaded successfully";
         $message_class = "bg-success";
     } else {
         $message = join("<br>", $photo->errors);
         $message_class = "bg-danger";
     }
+
+    if ($is_dropzone) {
+        echo $message;
+        exit;
+    }
 }
+
+?>
+
+<?php include(__DIR__ . "/includes/header.php"); ?>
+
+<?php
 
 ?>
 
