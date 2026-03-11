@@ -34,8 +34,9 @@ $comments = Comment::find_the_comments($_GET['id']);
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Comments
-                            <small>Subheading</small>
                         </h1>
+
+                        <p class="bg-success"><?php echo $message; ?></p>
 
 
 
@@ -54,7 +55,7 @@ $comments = Comment::find_the_comments($_GET['id']);
                             <td><?php echo $comment->id; ?></td>     
                             <td><?php echo $comment->author; ?>                            
                                 <div class="action_links">
-                                    <a href="comment_comment_delete.php?id=<?php echo $comment->id; ?>">Delete</a>
+                                    <a href="comment_delete.php?id=<?php echo $comment->id; ?>">Delete</a>
                                     <!-- <a href="user_edit.php?id=COMMENT_ID">Edit</a> -->
                                 </div>
                             </td>

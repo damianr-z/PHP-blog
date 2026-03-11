@@ -109,3 +109,20 @@ ul.pager > li.active > a:focus {
 #modal_sidebar {
   position: static;
 }
+
+.img_thumbnail {
+  object-fit: cover;
+  height: 80px;
+  width: 120px;
+}
+
+.dropzone {
+  border: 6px dashed #0087f7 !important;
+  border-radius: 5px;
+  background: white;
+  margin-top: 30px;
+}
+
+#login-id label {
+  color: #fff;
+}

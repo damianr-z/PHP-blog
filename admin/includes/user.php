@@ -13,11 +13,8 @@ class User extends Db_object {
     public $user_image;
     public $filename;
     public $tmp_path = '';
-    public $upload_directory = "images";
-    public $image_placeholder = "https://placeholdit.com/75x60/?text=No+Image";
-
-
-
+    public $uploads_directory = "images";
+    public $image_placeholder = "https://placeholdit.com/600x400/?text=No+Image";
 
     //this id passing $_FILES['uploaded_file'] as an argument
 
@@ -44,7 +41,7 @@ class User extends Db_object {
             }
 
             // this is the permanent path
-            $target_path = SITE_ROOT . DS . 'admin' . DS . $this->upload_directory . DS . $this->user_image; 
+            $target_path = SITE_ROOT . DS . 'admin' . DS . $this->uploads_directory . DS . $this->user_image; 
 
             if(file_exists($target_path)) {
                 $this->errors[] = "The file {$this->user_image} already exists";
@@ -62,7 +59,7 @@ class User extends Db_object {
 
 
     public function image_placeholder_path() {
-        return empty($this->user_image) ? $this->image_placeholder : $this->upload_directory . '/' . $this->user_image;
+        return empty($this->user_image) ? $this->image_placeholder : $this->uploads_directory . '/' . $this->user_image;
     }
 
 
@@ -98,6 +95,7 @@ class User extends Db_object {
     echo $this->image_placeholder_path();
 
     }
+
 
 
 }

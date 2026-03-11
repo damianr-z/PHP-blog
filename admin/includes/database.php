@@ -10,7 +10,6 @@ class Database {
         $this->open_db_connection();
     }
 
-
     public function open_db_connection() {
 
         // $this->connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
@@ -37,12 +36,11 @@ class Database {
     }
 
     public function escape_string($string) {
-        $escaped_string = mysqli_real_escape_string($this->connection,$string);
-        return $escaped_string;
-    }
+            return $this->connection->real_escape_string($string);    
+}
 
     public function the_insert_id() {
-        return mysqli_insert_id($this->connection);
+        return $this->connection->insert_id;
     }
 }
 

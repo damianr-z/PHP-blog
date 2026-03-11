@@ -13,7 +13,13 @@ if(isset($_POST['create'])) {
         $user->last_name = $_POST['last_name'];
         $user->password = $_POST['password'];
 
+        if(isset($_FILES['user_image']) && $_FILES['user_image']['error'] === UPLOAD_ERR_OK) {
+            $user->set_file($_FILES['user_image']);
+            $user->photo_uploader();
+        }
+        $session->message("The user {$user->username} has been created");
         $user->save();
+        redirect("users.php");
     }
 }
 
@@ -36,18 +42,25 @@ if(isset($_POST['create'])) {
 
 <div id="page-wrapper">
 
-                <div class="container-fluid">
+  <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Users
-                    <small>Subheading</small>
                 </h1>
+
+                <p class="bg-success"><?php echo $message; ?></p>
+
+                <div class="col-md-6 user_image_box">
+                <a href="#" data-toggle="modal" data-target="#photo-library"><img class="img-responsive" src="<?php echo $user->image_placeholder_path(); ?>" alt=""></a>
+
+                </div>
                  
                 <form action="" method='post' enctype="multipart/form-data">
-                    <div class="col-md-6 col-md-offset-3">
+
+                    <div class="col-md-6">
                     
                     <div class="form-group">     
                         <input type="file" name="user_image">
@@ -80,12 +93,12 @@ if(isset($_POST['create'])) {
                     
                 </div>
             </form>
+
+            </div>
             <!-- /.side_menu -->
+        
         </div>
         <!-- /.row -->
-
-
-
 
     </div>
     <!-- /.container-fluid -->

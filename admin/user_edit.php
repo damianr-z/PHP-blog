@@ -10,29 +10,25 @@ if(isset($_GET['id'])) {
     $user = new User();
 }
 
-if(isset($_POST['update'])) {
-    if($user) {
-        $user->username = $_POST['username'];
+if (isset($_POST['update'])) {
+    if ($user) {
+        $user->username   = $_POST['username'];
         $user->first_name = $_POST['first_name'];
-        $user->last_name = $_POST['last_name'];
-        $user->password = $_POST['password'];
+        $user->last_name  = $_POST['last_name'];
+        $user->password   = $_POST['password'];
 
-        $user->set_file($_FILES['user_image']);
-        // Only upload if a file was actually selected
-        if(isset($_FILES['user_image']) && $_FILES['user_image']['error'] === UPLOAD_ERR_OK) {
+        // Upload only when a real file was selected
+        if (isset($_FILES['user_image']) && $_FILES['user_image']['error'] === UPLOAD_ERR_OK) {
+            $user->set_file($_FILES['user_image']);
             $user->photo_uploader();
         }
+
         $user->save();
-        redirect("user_edit.php?id={$user->id}");
+        $session->message("The user has been updated");
+        redirect("users.php");
     }
-
-
-
-
-
-    }
+}
 ?>
-
 
         <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

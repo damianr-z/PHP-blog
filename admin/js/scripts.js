@@ -73,4 +73,47 @@ $(document).ready(function () {
   if ($.fn.summernote && $('#summernote').length) {
     $('#summernote').summernote({ height: 300 });
   }
+
+  if (
+    typeof Dropzone !== 'undefined' &&
+    document.getElementById('photo-dropzone')
+  ) {
+    Dropzone.autoDiscover = false;
+    new Dropzone('#photo-dropzone', {
+      paramName: 'file-upload',
+      acceptedFiles: 'image/*',
+      init: function () {
+        this.on('success', function (file, responseText) {
+          var isSuccess =
+            typeof responseText === 'string' &&
+            responseText
+              .toLowerCase()
+              .indexOf('photo uploaded successfully') !== -1;
+
+          $('#upload-message')
+            .removeClass('bg-success bg-danger')
+            .addClass(isSuccess ? 'bg-success' : 'bg-danger')
+            .html(responseText);
+        });
+
+        this.on('error', function (file, errorMessage) {
+          $('#upload-message')
+            .removeClass('bg-success')
+            .addClass('bg-danger')
+            .html(errorMessage);
+        });
+      },
+    });
+  }
+
+  $('.info-box-header').on('click', () => {
+    $('.inside').slideToggle('fast');
+    $('#toggle').toggleClass('glyphicon-menu-down glyphicon-menu-up');
+  });
+
+  $(document).on('click', 'a[href*="_delete.php?id="]', (e) => {
+    if (!confirm('Are you sure you want to delete this item?')) {
+      e.preventDefault();
+    }
+  });
 });

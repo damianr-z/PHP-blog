@@ -8,6 +8,7 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+    <script src="../node_modules/dropzone/dist/dropzone-min.js"></script>
     <script src="js/scripts.js"></script>
 
     <script type="text/javascript">

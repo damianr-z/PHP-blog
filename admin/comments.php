@@ -32,7 +32,7 @@ $comments = Comment::find_all();
                             Comments
                         </h1>
 
-
+            <p class="bg-success"><?php echo $message; ?></p>
 
             <div class="col-lg-12">
                 <table class="table table-hover">
@@ -50,7 +50,6 @@ $comments = Comment::find_all();
                             <td><?php echo $comment->author; ?>                            
                                 <div class="action_links">
                                     <a href="comment_delete.php?id=<?php echo $comment->id; ?>">Delete</a>
-                                    <!-- <a href="user_edit.php?id=COMMENT_ID">Edit</a> -->
                                 </div>
                             </td>
                                 

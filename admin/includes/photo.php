@@ -70,17 +70,6 @@ class Photo extends Db_object {
 
         } 
     }
-
-
-    public function photo_delete() {
-        if($this->delete()) {
-            $target_path = SITE_ROOT . DS . 'admin' . DS . $this->uploads_directory . DS . $this->filename;
-            return unlink($target_path) ? true : false;
-        } else {
-            return false;
-        }
-    }
-
     public static function display_sidebar_data($photo_id) {
         $photo = Photo::find_by_id($photo_id);
         // $output = "<a class='thumbnail' href='#'><img width='100' src='{$photo->picture_path()}' /></a>";
