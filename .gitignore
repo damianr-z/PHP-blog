@@ -27,6 +27,7 @@ Thumbs.db
 *.temp
 *.bak
 *.orig
+*/images
 
 # Local env files
 .env

@@ -3,6 +3,8 @@
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 
 <?php
+$message = "";
+$message_class = "";
 if(isset($_FILES['file-upload']) && !isset($_POST['submit'])) {
     $photo = new Photo();
     $photo->user_id = $_SESSION['user_id'];
@@ -10,9 +12,11 @@ if(isset($_FILES['file-upload']) && !isset($_POST['submit'])) {
     $photo->set_file($_FILES['file-upload']);
 
     if($photo->save()) {
-        echo "Photo uploaded successfully";
+        $message = "Photo uploaded successfully";
+        $message_class = "bg-success";
     } else {
-        echo join("<br>", $photo->errors);
+        $message = join("<br>", $photo->errors);
+        $message_class = "bg-danger";
     }
     exit;
 }
@@ -23,16 +27,17 @@ if(isset($_FILES['file-upload']) && !isset($_POST['submit'])) {
 
 <?php 
 
-$message = "";
-if(isset($_POST['file'])) {
+if(isset($_POST['submit'])) {
     $photo = new Photo();
     $photo->title = $_POST['title'];
-    $photo->set_file($_FILES['file']);
+    $photo->set_file($_FILES['file-upload']);
 
     if($photo->save()) {
         $message = "Photo uploaded successfully";
+        $message_class = "bg-success";
     } else {
         $message = join("<br>", $photo->errors);
+        $message_class = "bg-danger";
     }
 }
 
@@ -71,7 +76,7 @@ if(isset($_POST['file'])) {
   
                     <div class="col-md-6">
 
-                    <div id="upload-message"><?php echo $message; ?></div>
+                    <div id="upload-message" <?php if($message_class): ?>class="<?php echo $message_class; ?>"<?php endif; ?>><?php echo $message; ?></div>
 
                         <form
                         action="uploads.php" method="post" enctype="multipart/form-data"
@@ -81,7 +86,7 @@ if(isset($_POST['file'])) {
                             </div>
 
                             <div class="form-group">
-                                <input type="file" name="file" />
+                                <input type="file" name="file-upload" />
                             </div>
 
 
